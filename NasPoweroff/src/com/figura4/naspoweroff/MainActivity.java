@@ -31,7 +31,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	protected EditText console;
-    private String[] mPlanetTitles;
+    private String[] mMenuTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -43,38 +43,20 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+		mMenuTitles = getResources().getStringArray(R.array.menu_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
+                R.layout.drawer_list_item, mMenuTitles));
+        
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
 		
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
@@ -111,6 +93,28 @@ public class MainActivity extends Activity {
 	}
 	
     private void selectItem(int position) {
+    	Intent i;
+    	
+    	switch (position) {
+    		case 0:
+	        	i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                break;
+    			
+    		case 1:
+	        	i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                break;
+    			
+    		case 2:
+    			Intent intent = new Intent(Intent.ACTION_MAIN);
+	        	intent.addCategory(Intent.CATEGORY_HOME);
+	        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        	startActivity(intent);
+    			break;
+    	}
+    	
+    	/**
         // Create a new fragment and specify the planet to show based on position
         Fragment fragment = new PlanetFragment();
         Bundle args = new Bundle();
@@ -121,11 +125,11 @@ public class MainActivity extends Activity {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, fragment)
-                       .commit();
+                       .commit();**/
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
+        setTitle(mMenuTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
@@ -144,7 +148,7 @@ public class MainActivity extends Activity {
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_planet, container, false);
             int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            String planet = getResources().getStringArray(R.array.planets_array)[i];
+            String planet = getResources().getStringArray(R.array.menu_array)[i];
 
             int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
                             "drawable", getActivity().getPackageName());
