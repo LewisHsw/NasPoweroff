@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory 
+        android:title="@string/pref_network_title"
+        android:key="network_settings">
+        
+	    <EditTextPreference
+	        android:defaultValue="@string/pref_nas_ip_address_default"
+	        android:inputType="textNoSuggestions"
+	        android:key="nas_ip_address"
+	        android:maxLines="1"
+	        android:selectAllOnFocus="true"
+	        android:singleLine="true"
+	        android:title="@string/pref_nas_ip_address_title" />
+	    
+	    <EditTextPreference
+	        android:defaultValue="@string/pref_nas_ssh_username_default"
+	        android:inputType="textNoSuggestions"
+	        android:key="nas_ssh_username"
+	        android:maxLines="1"
+	        android:selectAllOnFocus="true"
+	        android:singleLine="true"
+	        android:title="@string/pref_nas_ssh_username_title" />
+	    
+	    <EditTextPreference
+	        android:defaultValue="@string/pref_nas_ssh_password_default"
+	        android:inputType="textPassword"
+	        android:key="nas_ssh_password"
+	        android:maxLines="1"
+	        android:selectAllOnFocus="true"
+	        android:singleLine="true"
+	        android:title="@string/pref_nas_ssh_password_title" />
+	    
+	    <EditTextPreference
+	        android:defaultValue="@string/pref_nas_ssh_port_default"
+	        android:inputType="number"
+	        android:key="nas_ssh_port"
+	        android:maxLines="1"
+	        android:selectAllOnFocus="true"
+	        android:singleLine="true"
+	        android:title="@string/pref_nas_ssh_port_title" />
+	    
+	</PreferenceCategory>
+	
+    <PreferenceCategory 
+        android:title="@string/pref_advanced_title"
+        android:key="advanced_settings">
+	    
+        <EditTextPreference
+	        android:defaultValue="@string/pref_nas_command_default"
+	        android:inputType="textNoSuggestions"
+	        android:key="nas_command"
+	        android:maxLines="1"
+	        android:selectAllOnFocus="true"
+	        android:singleLine="true"
+	        android:title="@string/pref_nas_command_title" />
+        
+    </PreferenceCategory>
+</PreferenceScreen>
