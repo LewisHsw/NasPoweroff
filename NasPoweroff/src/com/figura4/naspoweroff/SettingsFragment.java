@@ -18,6 +18,8 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
         
+        getActivity().setTitle("Settings");
+        
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
             initSummary(getPreferenceScreen().getPreference(i));
         }
